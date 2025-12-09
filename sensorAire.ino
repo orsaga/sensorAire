@@ -19,6 +19,7 @@ WebServer server(80);
 // ------- HTML -------
 String htmlPage() {
   int valor = analogRead(MQ135_PIN);
+  //String calidad = (valor < 1000) ? "Buena" : (valor < 1250) ? "Regular" : "Mala";
   String calidad = (valor < 1500) ? "Buena" : (valor < 2500) ? "Regular" : "Mala";
 
   String page = R"(
@@ -106,9 +107,11 @@ void loop() {
   display.println("Calidad del aire:");
 
   if (valor < 1500) {
+  //if (valor < 1000) {
     display.println("Buena");
     digitalWrite(BUZZER_PIN, LOW);
   } else if (valor < 2500) {
+  //} else if (valor < 1240) {
     display.println("Regular");
     digitalWrite(BUZZER_PIN, LOW);
   } else {
